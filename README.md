@@ -84,7 +84,7 @@
     }
 }
 ```
-
+-
 ### POST /login
 - Allow an user to login with their email and password.
 - On a successful login attempt return the userId and a JWT token contatining the userId, exp, iat.
