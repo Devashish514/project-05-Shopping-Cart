@@ -26,32 +26,32 @@
 //                 const userItems = findUser.items;
 //                 let totalPrice = findUser.totalPrice;
 //                 const count = [];
-//                 //Validating Duplicate Items In cart..
-//                 const checkProducts = function (arr1, arr2) {
-//                     for (let i = 0; i < arr1.length; i++) {
-//                         for (let j = 0; j < arr1.length; j++) {
-//                             if (arr1[i].productId == arr2[j]) {
-//                                 count.push(String(i));
-//                             }
-//                         }
-//                     }
-//                 }
-//                 checkProducts(userItems, productId);
-//                 if (count.length != 0) {
-//                     let obj = {};    //{ '0': 1, '1': 2 }
-//                     count.forEach(current => {
-//                         if (!obj[current]) {
-//                             obj[current] = 1;
-//                         } else {
-//                             obj[current]++;
-//                         }
-//                     });
-//                     let objArr = Object.keys(obj);
-//                     let objValArr = Object.values(obj);
-//                     for (let i = 0; i < objArr.length; i++) {
-//                         let index = Number(objArr[i]);
-//                         userItems[index].quantity += objValArr[index];
-//                     }
+                //Validating Duplicate Items In cart..
+                // const checkProducts = function (arr1, arr2) {
+                //     for (let i = 0; i < arr1.length; i++) {
+                //         for (let j = 0; j < arr1.length; j++) {
+                //             if (arr1[i].productId == arr2[j]) {
+                //                 count.push(String(i));
+                //             }
+                //         }
+                //     }
+                // }
+                // checkProducts(userItems, productId);
+                // if (count.length != 0) {
+                //     let obj = {};    //{ '0': 1, '1': 2 }
+                //     count.forEach(current => {
+                //         if (!obj[current]) {
+                //             obj[current] = 1;
+                //         } else {
+                //             obj[current]++;
+                //         }
+                //     });
+                //     let objArr = Object.keys(obj);
+                //     let objValArr = Object.values(obj);
+                //     for (let i = 0; i < objArr.length; i++) {
+                //         let index = Number(objArr[i]);
+                //         userItems[index].quantity += objValArr[index];
+                //     }
 //                 }
 
 //                 for (let i = 0; i < productId.length; i++) {

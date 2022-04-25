@@ -85,12 +85,6 @@ const createProduct = async function (req, res) {
             } else {
                 return res.status(400).send({ status: false, message: "require-->'currencyFormat'.!!" });
             }
-            // if(data.isFreeShipping){
-            //     const isFreeShipping= data.isFreeShipping;
-            //     if(typeof data.isFreeShipping!="boolean"){
-            //         return res.status(400).send({ status: false, message: "Invalid key.!!" });
-            //     }
-            // }
             if (!data.availableSizes) {
                 return res.status(400).send({ status: false, message: "please provide Available Size...!!" });
             } else {
@@ -119,14 +113,12 @@ const getProduct = async function (req, res) {
         if (filters) {
             if (filters.size) {
                 const size = filters.size.toUpperCase();
-                let arr = ["S", "XS", "L", "M", "XXL", "XL"]
-                const checkSize = arr.find(element => element == size);
-                if (!checkSize) {
-                    return res.status(400).send({ status: false, message: "Invalid Size input..!!" });
-                }
-                // condiions.availableSizes = filters.size;
+                // let arr = ["S", "XS", "L", "M", "XXL", "XL"]
+                // const checkSize = arr.find(element => element == size);
+                // if (!checkSize) {
+                //     return res.status(400).send({ status: false, message: "Invalid Size input..!!" });
+                // }
                 let findSize = filters.size.toUpperCase().split(",");
-                // console.log(findSize)
                 let findData = await productModel.find({ condiions, availableSizes: findSize });
                 if (findData.length == 0) {
                     return res.status(404).send({ status: false, Message: "No Product Found!!" });
@@ -143,7 +135,8 @@ const getProduct = async function (req, res) {
                         return res.status(400).send({ status: false, message: "Invalid name input..!!" });
                     }
                 }
-                condiions.title = filters.name;
+                let findData3 = await productModel.find({ condiions, title: filters.name });
+                return res.status(200).send({ status: true, data: findData3 });
             }
             if (filters.priceGreaterThan) {
                 let findData = await productModel.find({ condiions, price: { $gte: `${filters.priceGreaterThan}` } });
@@ -163,7 +156,6 @@ const getProduct = async function (req, res) {
             }
         }
         let result = await productModel.find({ condiions });
-
         result.sort(function (a, b) {
             const priceA = a.price
             const priceB = b.price

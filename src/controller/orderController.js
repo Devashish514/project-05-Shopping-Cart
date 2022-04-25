@@ -12,9 +12,9 @@ const createOrder = async function (req, res) {
     if (!isValidObjectId(userID)) {
         return res.status(400).send({ status: false, message: "Invalid UserID..!!" });
     }
-    // if (req.validateUser != userID) {
-    //     return res.status(400).send({ status: false, message: "Not Authorize" });
-    // }
+    if (req.validateUser != userID) {
+        return res.status(400).send({ status: false, message: "Not Authorize" });
+    }
     let data = req.body;
     if (Object.keys(data).length == 0) {
         return res.status(400).send({ status: false, message: "Body Empty.!!" });
@@ -83,9 +83,9 @@ const createOrder = async function (req, res) {
 
 const updateOrder = async function (req, res) {
     let userId = req.params.userId;
-    // if (req.validateUser != userId) {
-    //     return res.status(401).send({ status: false, message: "Not Authorize..!!" });
-    // }
+    if (req.validateUser != userId) {
+        return res.status(401).send({ status: false, message: "Not Authorize..!!" });
+    }
     if (!isValidObjectId(userId)) {
         return res.status(400).send({ status: false, message: "invalid userId..!!" });
     }

@@ -10,7 +10,7 @@ const auth = async function (req, res, next) {
         let tokenData = token.split(" ");  // token is stored as "bearer tokenValue" inside authorization header.., thats why splitting it into array [bearer, token Value]....
         // [bearer token]
         let verifyToken = jwt.verify(tokenData[1], "secretKey");
-        console.log(verifyToken);
+        // console.log(verifyToken);
         if (!verifyToken) {
             return res.status(401).send({ status: false, message: "Not Authorize" });
         } else {
@@ -28,3 +28,4 @@ const auth = async function (req, res, next) {
 
 }
 module.exports = { auth };
+

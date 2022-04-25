@@ -54,9 +54,7 @@ const registerUser = async function (req, res) {
                 if (!validUrl.isUri(data.profileImage)) {
                     return res.status(400).send({ status: false, message: "invalid Link for profile image" })
                 }
-            }// else {
-            //     return res.status(400).send({ status: false, message: "Required profileLink" })
-            // }
+            }
             if (data.phone) {
                 const indianPhone = data.phone;
                 const check = Number(indianPhone);
@@ -125,9 +123,6 @@ const registerUser = async function (req, res) {
                     if (isNaN(pincode)) {
                         return res.status(404).send({ status: false, message: "Invalid shipping Pincode" });
                     }
-                    // if (typeof data.address.shipping.pincode != "number") {
-                    //     return res.status(404).send({ status: false, message: "Invalid shipping Pincode" });
-                    // }
                 }
                 if (!data.address.billing.street) {
                     return res.status(404).send({ status: false, message: "billing Street required" });
@@ -162,7 +157,6 @@ const registerUser = async function (req, res) {
                     }
                 }
             }
-
         }
         const encryptedPassword = await bcrypt.hash(data.password, 10);  // saving password in encrypted form 
         // hashpassword = encryptedPassword;
@@ -185,7 +179,6 @@ const registerUser = async function (req, res) {
     }
 
 }
-
 //<<<<<<<<<<========================================  Login API ==============================================>>>>>>>>>>
 const userLogin = async function (req, res) {
     try {
@@ -233,7 +226,6 @@ const getDetail = async function (req, res) {
         if (!isValidObjectId(userId)) {
             return res.status(400).send({ status: false, message: "Invalid Params" });
         }
-        // console.log(userId)
         if (userId != req.ValidateUser) {  //Authorize User
             return res.status(401).send({ status: false, message: "not AUthorize" });
         } else {
@@ -261,7 +253,6 @@ const getDetail = async function (req, res) {
         console.log(err);
         res.status(500).send({ status: false, message: err });
     }
-
 }
 
 //<<<<<<<<<<========================================Update API ===============================================>>>>>>>>>>
@@ -436,7 +427,6 @@ const updateUserDetail = async function (req, res) {
 }
 
 module.exports = { registerUser, userLogin, getDetail, updateUserDetail };
-
 
 
 

@@ -10,9 +10,10 @@ const isValidObjectId = function (objectId) {
 
 const createCart = async function (req, res) {
     let userId = req.params.userId;
-    // if (userId != req.validateUser) {
-    //     return res.status(401).send({ status: false, message: "Not Authorize..!!" });
-    // }
+    // console.log(userId)
+    if (userId != req.ValidateUser) {  //Authorize User
+        return res.status(401).send({ status: false, message: "not AUthorize" });
+    }
     let data = req.body;
     if (Object.keys(data).length == 0) {
         return res.status(400).send({ status: false, message: "No Body Found..!!" });
@@ -24,7 +25,7 @@ const createCart = async function (req, res) {
                 return res.status(400).send({ status: false, message: "Invalid UserId..!!" });
             }
             if (userId != data.userId) {
-                return res.status(401).send({ status: false, message: "Not Authorize..!!" });
+                return res.status(401).send({ status: false, message: "NOt Authorize..!!" });
             }
         }
         const findUser = await cartModel.findOne({ userId: userId });
@@ -116,14 +117,13 @@ const createCart = async function (req, res) {
     }
 }
 
-
 const updateCart = async function (req, res) {
     let userId = req.params.userId;
     if (!isValidObjectId(userId)) {
         return res.status(400).send({ status: false, message: "Invalid UserId" });
     }
-    if (req.validateUser != userId) {
-        return res.status(400).send({ status: false, messsage: "Not Authorize..!!" });
+    if (userId != req.ValidateUser) {  //Authorize User
+        return res.status(401).send({ status: false, message: "not AUthorize" });
     }
     let dataToUpdate = req.body;
     if (Object.keys(dataToUpdate).length == 0) {
@@ -150,9 +150,9 @@ const updateCart = async function (req, res) {
             }
             if (userItems[i].productId == productId) {
                 if (removeProduct == 0) {
+                    findCart.totalPrice -= (findProduct.price*userItems[i].quantity);
                     userItems.splice(i, 1);
                     findCart.totalItems -= 1;
-                    findCart.totalPrice -= findProduct.price;
                     findCart.save()
                 }
                 if (removeProduct == 1) {
@@ -171,9 +171,8 @@ const getCart = async function (req, res) {
     if (!isValidObjectId(userId)) {
         return res.status(400).send({ status: false, message: "Invalid userId" });
     }
-
-    if (req.validateUser != userId) {
-        return res.status(401).send({ status: false, message: "not Authorize..!!" })
+    if (userId != req.ValidateUser) {  //Authorize User
+        return res.status(401).send({ status: false, message: "not AUthorize" });
     }
     let findCart = await cartModel.findOne({ userId: userId });
     if (!findCart) {
@@ -188,10 +187,9 @@ const deleteCart = async function (req, res) {
     if (!isValidObjectId(userId)) {
         return res.status(400).send({ statsu: false, message: "Invalid UserId" });
     }
-    //Authorization
-    // if (req.validateUser != userId) {
-    //     return res.status(401).send({ status: false, message: "Not Authorize" })
-    // }
+    if (userId != req.ValidateUser) {  //Authorize User
+        return res.status(401).send({ status: false, message: "not AUthorize" });
+    }
     let findCart = await cartModel.findOne({ userId: userId });
     if (!findCart) {
         return res.status(400).send({ status: false, message: "No cart" });
